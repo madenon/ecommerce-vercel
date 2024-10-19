@@ -1,19 +1,24 @@
-import express from "express"
-import cors from "cors"
-import "dotenv/config"
-import {connectDB} from "./config/db.js"
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import connectDB from "./config/mongodb.js";
+import router from "./routes/index.js";
+import cookieParser  from "cookie-parser"
 
+const app = express();
 
-const app = express()
+connectDB();
+app.use(express.json());
+app.use(cors({
+  origin:process.env.FRONTEND_URL,
+  credentials:true
+}));
+app.use(cookieParser())
 
-connectDB().then(()=>{
-    app.listen(PORT, ()=>{
-        console.log('connexion a la base de donnée')
-        console.log(`Server bien demarré au port:  http://localhost:${PORT}`)
-    })
-})
-app.use(express.json())
-app.use(cors())
+app.use("/api", router);
 
-const PORT = 8000 || process.env.PORT
+const PORT = 8000 || process.env.PORT;
 
+app.listen(PORT, () => {
+  console.log(`Server bien demarré au port:  http://localhost:${PORT}`);
+});

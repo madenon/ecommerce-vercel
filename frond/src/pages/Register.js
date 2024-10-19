@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import loginIcons from "../assest/signin.gif";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imageTobase64 from "../helpers/imageTobase";
+import SummaryApi from "../commun";
+import { toast } from "react-toastify";
+
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirPassword, setShowConfirmPassword] = useState(false);
@@ -11,10 +14,11 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    showConfirPassword: "",
+    password2: "",
     profilePic: "",
   });
-  console.log("data", data);
+
+  const navigate = useNavigate();
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => {
@@ -25,22 +29,49 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+   try {
+    
+    const password = data.password
+    const passwordConfirm = data.password2
+    const dataResponse = await fetch(SummaryApi.signUp.url, {
+          method: SummaryApi.signUp.method,
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+    if(password === passwordConfirm){
+      const dataApi = await dataResponse.json();
+      toast.success(dataApi.message);
+      navigate("/login")
+    }
+
+    if (password !== passwordConfirm){
+      const dataApi = await dataResponse.json();
+          toast.error(dataApi.message)
+    }
+   } catch (error) {
+    console.log(error)
+    toast.error(data.message.error)
+    
+   }
   };
 
-  const handleUploadPic= async(e)=>{
-    const file = e.target.files[0]
+  const handleUploadPic = async (e) => {
+    const file = e.target.files[0];
 
-    const imagePic = await imageTobase64(file)
-    setData((prev)=>{
-        return{
-            ...prev,
-            profilePic:imagePic,
-        }
-    })
-
-  }
+    const imagePic = await imageTobase64(file);
+    setData((prev) => {
+      return {
+        ...prev,
+        profilePic: imagePic,
+      };
+    });
+  };
 
   return (
     <section id="login" className="shadow-sm">
@@ -51,15 +82,17 @@ const Register = () => {
               <img src={data.profilePic || loginIcons} alt="Icon login" />
             </div>
             <form>
-                <label>
+              <label>
                 <div className="text-xs  bg-slate-200 bg-opacity-80 pb-4 cursor-pointer pt-2 text-center absolute bottom-0 w-full">
-              Télécharger une image de couverture
-            </div>
-                    <input type="file" className="hidden"  onChange={handleUploadPic}/>
-                </label>
-           
+                  Télécharger une image de couverture
+                </div>
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleUploadPic}
+                />
+              </label>
             </form>
-            
           </div>
 
           <form onSubmit={handleSubmit} className="pt-6 flex-col gap-2">
@@ -71,7 +104,7 @@ const Register = () => {
                   name="name"
                   value={data.name}
                   onChange={handleOnChange}
-                  placeholder="entrer votre Nom complet" required
+                  placeholder="entrer votre Nom complet"
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -84,7 +117,7 @@ const Register = () => {
                   name="email"
                   value={data.email}
                   onChange={handleOnChange}
-                  placeholder="entrer votre email" required
+                  placeholder="entrer votre email"
                   className="w-full h-full outline-none bg-transparent"
                 />
               </div>
@@ -97,7 +130,7 @@ const Register = () => {
                   onChange={handleOnChange}
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="entrer votre mot de passe" required
+                  placeholder="entrer votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div
@@ -113,11 +146,11 @@ const Register = () => {
               <label>Confirmer Mot de passe: </label>
               <div className="bg-slate-100 p-2 flex">
                 <input
-                  value={data.showConfirPassword}
+                  value={data.password2}
                   onChange={handleOnChange}
-                  name="showConfirPassword"
+                  name="password2"
                   type={showConfirPassword ? "text" : "password"}
-                  placeholder="Confirmez votre mot de passe" required
+                  placeholder="Confirmez votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
                 />
                 <div

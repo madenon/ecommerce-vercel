@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import loginIcons from "../assest/signin.gif";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import SummaryApi from "../commun";
+import { toast } from "react-toastify";
+import Context from "../context";
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const {fetchUserDetails} = useContext(Context)
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  console.log('data', data)
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => {
@@ -20,10 +26,33 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  }
+    try {
+      const dataResponse = await fetch(SummaryApi.signIn.url, {
+        method: SummaryApi.signIn.method,
+        credentials:'include',
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const dataApi = await dataResponse.json();
+      if (dataApi.success) {
+        toast.success(dataApi.message);
+        navigate("/")
+        fetchUserDetails()
+      }
+      if(dataApi.error){
+        toast.error(dataApi.message)
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return (
     <section id="login" className="shadow-sm">
@@ -57,7 +86,6 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="entrer votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
-                
                 />
                 <div
                   className="cursor-pointer text-xl"
@@ -83,7 +111,10 @@ const Login = () => {
           </form>
           <p className="my-5">
             Vous n'avez pas de compte ?
-            <Link to={"/register"} className="text-red-400 hover:text-red-700 m-1">
+            <Link
+              to={"/register"}
+              className="text-red-400 hover:text-red-700 m-1"
+            >
               S'sinscrire
             </Link>
           </p>
