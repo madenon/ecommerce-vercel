@@ -6,7 +6,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Register from "../pages/Register";
 import AdminPanel from "../pages/AdminPanel";
 import AllUsers from "../pages/AllUsers";
-import Products from "../components/Products";
+import AllProducts from "../pages/AllProducts";
+import CategoryProduct from "../pages/CategoryProduct";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +18,13 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/register", element: <Register /> },
+      { path: "/product-category/:categoryName", element: <CategoryProduct /> },
+
       { path: "/admin-panel", element: <AdminPanel />,
         children:[
           { path: "all-users",
              element: <AllUsers/> },
-          { path: "all-products", element: <Products /> },
+          { path: "all-products", element: <AllProducts /> },
         ]
        },
      

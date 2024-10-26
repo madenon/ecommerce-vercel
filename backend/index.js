@@ -14,7 +14,6 @@ app.use(cors({
   credentials:true
 }));
 app.use(cookieParser())
-
 app.use("/api", router);
 
 const PORT = 8000 || process.env.PORT;

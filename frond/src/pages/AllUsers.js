@@ -1,23 +1,93 @@
-import React, { useEffect, useState } from 'react'
-import SummaryApi from '../commun'
+import React, { useEffect, useState } from "react";
+import SummaryApi from "../commun";
+import { toast } from "react-toastify";
+import moment from "moment";
+import { MdOutlineModeEdit } from "react-icons/md";
+import ChangeUserRole from "../components/ChangeUserRole";
 
 const AllUsers = () => {
-  const [allUser, setAllUsers] = useState([])
+  const [allUser, setAllUsers] = useState([]);
+  const [openUpdateRole, setOpenUpdateRole] = useState(false);
+  const [updateUserDetails, setUpdateUserDetails] = useState({
+    email: "",
+    name: "",
+    role: "",
+    _id:''
+  });
+  const fetchAllUers = async () => {
+    const fetchData = await fetch(SummaryApi.allUser.url, {
+      method: SummaryApi.allUser.method,
+      credentials: "include",
+    });
+    const dataResponse = await fetchData.json();
+    if (dataResponse.success) {
+      setAllUsers(dataResponse.data);
+    }
 
-  const fetchAllUers = async()=>{
-    const fetchData  = await fetch(SummaryApi.allUser.url,{
-      method:SummaryApi.allUser.method,
-      credentials:'include'
-    })
-    const  dataResponse = await  fetchData.json();
-    console.groupEnd(dataResponse);
-  }
-  useEffect(()=>{
-fetchAllUers()
-  },[])
+    if (dataResponse.error) {
+      toast.error(dataResponse.message);
+    }
+  };
+  useEffect(() => {
+    fetchAllUers();
+  }, []);
   return (
-    <div>AllUsers</div>
-  )
-}
+    <div className="bg-white pb-4">
+      <table className="w-full userTable">
+        <thead>
+        <tr className="bg-black text-white">
+        <th>ID</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Date de création</th>
+          <th>Action</th>
+        </tr>
+        </thead>
 
-export default AllUsers
+        <tbody>
+          {allUser.map((el, index) => {
+            return (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{el?.name}</td>
+                <td>{el?.email}</td>
+                <td>{el?.role}</td>
+                <td>{moment(el?.createdAt).format("LL")} </td>
+                <td>
+                  <button
+                    className="bg-green-100 p-2 rounded-full cursor-pointer
+                 hover:bg-green-500 hover:text-white"
+                    onClick={() => {
+                      setOpenUpdateRole(true)
+                      setUpdateUserDetails(el)
+                    }
+
+                    }
+                    
+
+                  >
+                    <MdOutlineModeEdit />
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      {openUpdateRole && (
+        <ChangeUserRole
+          onClose={() => setOpenUpdateRole(false)}
+          name={updateUserDetails.name}
+          email={updateUserDetails.email}
+          role={updateUserDetails.role}
+          userId={updateUserDetails._id}
+          callFunc={fetchAllUers}
+        />
+      )}
+    </div>
+  );
+};
+
+export default AllUsers;

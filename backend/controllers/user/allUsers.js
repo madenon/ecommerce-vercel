@@ -1,9 +1,18 @@
+import userModel from "../../models/userModel.js";
 
 
 const allUsers = async(req, res)=>{
 
 try {
-console.log('userId', req.userId)
+
+    const allUsers = await userModel.find()
+    res.json({
+    message:'Touts les utilisateurs',
+     data:allUsers,
+     success:true,
+     error:false
+
+})
 
     
 } catch (error) {
