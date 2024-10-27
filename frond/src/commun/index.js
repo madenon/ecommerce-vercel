@@ -41,6 +41,10 @@ const SummaryApi = {
   getAllProduct:{
     url: `${backendDomain}/api/get-category-product`,
     method: "get"
+  },
+  CategoryWiseProduct:{
+    url: `${backendDomain}/api/category-product`,
+    method: "post"
   }
 };
 

@@ -9,7 +9,8 @@ import { getProduct } from "../controllers/product/getProduct.js";
 import { editProduct } from "../controllers/product/updateProduct.js";
 import { uploadProduct } from "../controllers/product/uploadProduct.js";
 import { updateUser } from "../controllers/user/updateUser.js";
-import { getCategoryProduct } from "../controllers/product/getCategoryProduct.js";
+import { getCategoryProduct } from "../controllers/product/getCategoryProductOne.js";
+import { getCategoryWiseProduct } from "../controllers/product/getCategoryWiseProduct.js";
 
 const router = express.Router();
 router.post("/signup", userSignup);
@@ -26,5 +27,6 @@ router.post("/upload-product", authToken, uploadProduct);
 router.get("/get-product", getProduct);
 router.post("/update-product", authToken, editProduct);
 router.get("/get-category-product",  getCategoryProduct);
+router.post("/category-product",  getCategoryWiseProduct);
 
 export default router;
