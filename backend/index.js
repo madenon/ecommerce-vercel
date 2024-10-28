@@ -6,6 +6,7 @@ import router from "./routes/index.js";
 import cookieParser  from "cookie-parser"
 
 const app = express();
+const PORT = 8000 || process.env.PORT;
 
 connectDB();
 app.use(express.json());
@@ -16,7 +17,11 @@ app.use(cors({
 app.use(cookieParser())
 app.use("/api", router);
 
-const PORT = 8000 || process.env.PORT;
+app.get('/',(req, res)=>{
+  res.send("API working")
+})
+
+
 
 app.listen(PORT, () => {
   console.log(`Server bien demarré au port:  http://localhost:${PORT}`);
