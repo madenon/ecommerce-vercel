@@ -1,4 +1,4 @@
-const backendDomain = "https://boutique-backend-admin.vercel.app";
+const backendDomain = "https://admin-liart-beta-22.vercel.app";
 
 const SummaryApi = {
   signUp: {
