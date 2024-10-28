@@ -1,4 +1,4 @@
-const backendDomain = "https://admin-liart-beta-22.vercel.app";
+const backendDomain = "https://mern-eb63.onrender.com";
 
 const SummaryApi = {
   signUp: {
