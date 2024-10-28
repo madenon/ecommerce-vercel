@@ -1,4 +1,4 @@
-const backendDomain = "http://localhost:8000";
+const backendDomain = "https://boutique-backend-lovat.vercel.app";
 
 const SummaryApi = {
   signUp: {
