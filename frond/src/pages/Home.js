@@ -19,11 +19,11 @@ const Home = () => {
       <VertiCardProduct category={"tondeuses"} heading={"Les Tondeuses  pour vos coiffures"} />
       <VertiCardProduct category={"baffe"} heading={"Les Baffe Haut parleurs"} />
       <VertiCardProduct category={"chaussures"} heading={"Chaussures"} />
-      <VertiCardProduct category={"chaussures"} heading={"Chaussures"} />
-      <VertiCardProduct category={"ordinateur"} heading={"Les Ordinqteurs"} />
+      <VertiCardProduct category={"ordinateur"} heading={"Les Ordinqteurs"}  />
       <VertiCardProduct category={"processeur"} heading={"Les Processeurs"} />
       <VertiCardProduct category={"imprimantes"} heading={"Les imprimantes"} />
       <VertiCardProduct category={"réfrigérateur"} heading={"Les Réfrigérateur"} />
+      <VertiCardProduct category={"vetement"} heading={"Les Vetement"} />
       
       
 

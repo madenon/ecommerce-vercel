@@ -53,7 +53,7 @@ const VertiCardProduct = ({ category, heading }) => {
           return (
             <div
               key={index}
-              className="w-full min-w-[280px] md:min-w-[320px]  max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow"
+              className="w-full min-w-[180px] md:min-w-[240px]  max-w-[180px] md:max-w-[240px] bg-white rounded-sm shadow"
             >
               <div className="bg-slate-200 h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
                 <img

@@ -13,6 +13,7 @@ const productCategory = [
 { id:12, label:"Montres", value:"montres"},
 { id:13, label:"Chaussures", value:"chaussures"},
 { id:14, label:"Ordinateurs", value:"ordinateur"},
+{ id:14, label:"Vetements", value:"vetement"},
 ]
 
 export default productCategory
