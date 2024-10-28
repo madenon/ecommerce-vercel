@@ -1,4 +1,4 @@
-const backendDomain = "https://mern-backend-i1ev.onrender.com";
+const backendDomain = "http://localhost:8000";
 
 const SummaryApi = {
   signUp: {
