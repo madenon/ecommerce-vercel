@@ -1,4 +1,5 @@
-const backendDomain = process.env.REACT_APP_BACKEND_URL
+const backendDomain = "http://localhost:8000";
+
 const SummaryApi = {
   signUp: {
     url: `${backendDomain}/api/signup`,
