@@ -1,4 +1,4 @@
-const backendDomain = "https://mern-eb63.onrender.com";
+const backendDomain = "https://mern-backend-i1ev.onrender.com";
 
 const SummaryApi = {
   signUp: {
