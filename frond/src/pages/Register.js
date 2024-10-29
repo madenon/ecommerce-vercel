@@ -32,33 +32,31 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   try {
-    
-    const password = data.password
-    const passwordConfirm = data.password2
-    const dataResponse = await fetch(SummaryApi.signUp.url, {
-          method: SummaryApi.signUp.method,
-          headers: {
-            "content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
+    try {
+      const password = data.password;
+      const passwordConfirm = data.password2;
+      const dataResponse = await fetch(SummaryApi.signUp.url, {
+        method: SummaryApi.signUp.method,
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if(password === passwordConfirm){
-      const dataApi = await dataResponse.json();
-      toast.success(dataApi.message);
-      navigate("/login")
-    }
+      if (password !== passwordConfirm) {
+        const dataApi = await dataResponse.json();
+        toast.error(dataApi.message);
+      }
 
-    if (password !== passwordConfirm){
-      const dataApi = await dataResponse.json();
-          toast.error(dataApi.message)
+      if (password === passwordConfirm) {
+        const dataApi = await dataResponse.json();
+        toast.success(dataApi.message);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(data.message.error);
     }
-   } catch (error) {
-    console.log(error)
-    toast.error(data.message.error)
-    
-   }
   };
 
   const handleUploadPic = async (e) => {

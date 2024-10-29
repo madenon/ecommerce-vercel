@@ -18,7 +18,7 @@ const userSignin = async (req, res) => {
       throw new Error("Utilisateur non trouvé");
     }
 
-    const checkPassword = await bcrypt.compareSync(password, user.password);
+    const checkPassword = await bcrypt.compare(password, user.password);
 
     if (checkPassword) {
       const tokenData = {
