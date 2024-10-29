@@ -74,7 +74,7 @@ const Header = () => {
                 <nav>
                   {user?.role === ROLE.ADMIN && (
                     <Link
-                      to={"/admin-panel/all-products"}
+                      to="/admin-panel/all-products"
                       className="whitespace-nowrap md:block hover:bg-slate-100 p-2"
                       onClick={() => setMenuDisplay((preve) => !preve)}
                     >
@@ -105,7 +105,7 @@ const Header = () => {
               </button>
             ) : (
               <Link
-                to={"/login"}
+                to="/login"
                 type=""
                 className="px-3 py-1 rounded-full text-white bg-red-400 hover:bg-red-700"
               >
