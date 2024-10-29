@@ -10,7 +10,7 @@ import Context from "../context";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const {fetchUserDetails} = useContext(Context)
+  const { fetchUserDetails } = useContext(Context);
 
   const [data, setData] = useState({
     email: "",
@@ -32,25 +32,24 @@ const Login = () => {
     try {
       const dataResponse = await fetch(SummaryApi.signIn.url, {
         method: SummaryApi.signIn.method,
-        credentials:'include',
+        credentials: "include",
         headers: {
           "content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-  
+
       const dataApi = await dataResponse.json();
       if (dataApi.success) {
         toast.success(dataApi.message);
-        navigate("/")
-        fetchUserDetails()
+        navigate("/");
+        fetchUserDetails();
       }
-      if(dataApi.error){
-        toast.error(dataApi.message)
+      if (dataApi.error) {
+        toast.error(dataApi.message);
       }
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -86,6 +85,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="entrer votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-password"
                 />
                 <div
                   className="cursor-pointer text-xl"

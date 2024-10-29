@@ -9,16 +9,12 @@ const userDteails = async(req, res)=>{
         error:false,
         success:true,
         message:"Détails utilisateur"
-
        })
-
-
     } catch (error) {
-    console.log(error)
     res.status(400).json({
         message:error.message || error,
+        error:true,
         success: false,
-        error:true
     })
         
     }

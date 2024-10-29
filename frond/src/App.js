@@ -34,7 +34,7 @@ function App() {
     <>
       <Context.Provider
         value={{
-          fetchUserDetails, //user
+          fetchUserDetails
         }}
       >
         <ToastContainer />
