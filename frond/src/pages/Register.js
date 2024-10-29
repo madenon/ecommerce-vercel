@@ -51,7 +51,7 @@ const Register = () => {
       if (password === passwordConfirm) {
         const dataApi = await dataResponse.json();
         toast.success(dataApi.message);
-        navigate("login");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
