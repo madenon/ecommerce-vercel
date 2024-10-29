@@ -18,16 +18,16 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "register", element: <Register /> },
-      { path: "product-category/:categoryName", element: <CategoryProduct /> },
+      { path: "product-category", element: <CategoryProduct /> },
 
-      { path: "admin-panel", element: <AdminPanel />,
-        children:[
-          { path: "all-users",
-             element: <AllUsers/> },
+      {
+        path: "admin-panel",
+        element: <AdminPanel />,
+        children: [
+          { path: "all-users", element: <AllUsers /> },
           { path: "all-products", element: <AllProducts /> },
-        ]
-       },
-     
+        ],
+      },
     ],
   },
 ]);
