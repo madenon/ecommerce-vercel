@@ -1,6 +1,6 @@
 import express from "express";
 import { authToken } from "../middleware/authToken.js";
-import { logout } from "../controllers/user/userLogout.js";
+import {  userLoogout } from "../controllers/user/userLogout.js";
 import { userDteails } from "../controllers/user/userDetails.js";
 import { userSignin } from "../controllers/user/userSign.js";
 import { userSignup } from "../controllers/user/userSignUp.js";
@@ -15,7 +15,7 @@ import { getCategoryWiseProduct } from "../controllers/product/getCategoryWisePr
 const router = express.Router();
 router.post("/signup", userSignup);
 router.post("/signin", userSignin);
-router.get("/logout", logout);
+router.get("/logout", userLoogout);
 router.get("/user-details", authToken, userDteails);
 
 //Admin

@@ -107,7 +107,7 @@ const Header = () => {
               </button>
             ) : (
               <Link
-                to={"login"}
+                to={"/login"}
                 type=""
                 className="px-3 py-1 rounded-full text-white bg-red-400 hover:bg-red-700"
               >

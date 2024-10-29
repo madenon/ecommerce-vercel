@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "", element: <Home /> },
-      { path: "login", element: <Login /> },
+      { path: "/login", element: <Login /> },
       { path: "/forgot-password", element: <ForgotPassword /> },
       { path: "/register", element: <Register /> },
       { path: "/product-category/:categoryName", element: <CategoryProduct /> },
