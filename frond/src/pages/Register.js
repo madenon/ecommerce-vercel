@@ -169,7 +169,7 @@ const Register = () => {
           </form>
           <p className="my-5">
             Avez-vous déjà iun compte ?
-            <Link to={"login"} className="text-red-400 hover:text-red-700 m-1">
+            <Link to={"/login"} className="text-red-400 hover:text-red-700 m-1">
               Se connecter
             </Link>
           </p>
