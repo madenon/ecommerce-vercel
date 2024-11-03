@@ -9,7 +9,7 @@ const userSignup = async (req, res) => {
             throw new Error("Entrer un email valide")
         }
         if(!password){
-            throw new Error("Entrer  un mot de passe valide")
+            throw new Error("Entrer un mot de passe valide")
         }
         if(!password2){
             throw new Error("Confirmer votre mot de passe")
@@ -17,7 +17,7 @@ const userSignup = async (req, res) => {
         if(!name){
             throw new Error("Entrer un nom valide")
         }
-        const exitsEmail = await  userModel.findOne({email})
+        const exitsEmail = await userModel.findOne({email})
         if(exitsEmail){
             throw new Error("Email existe déjà")
 
@@ -28,7 +28,7 @@ const userSignup = async (req, res) => {
         }
 
         const salt = bcrypt.genSaltSync(10);
-        const hashPassword = await bcrypt.hashSync(password, salt);
+        const hashPassword =  bcrypt.hashSync(password, salt);
         if(!hashPassword){
             throw new Error("Une erreur s'est produite")
 
@@ -45,7 +45,7 @@ const userSignup = async (req, res) => {
         res.status(201).json({
             data:saveUser,
             success:true,
-            message:"Utilisateur a bien  été crée"
+            message:"Utilisateur a bien été crée"
         })
       
         

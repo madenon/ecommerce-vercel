@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GrFormSearch } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
@@ -9,13 +9,14 @@ import { toast } from "react-toastify";
 import { setUserDetails } from "../store/userSlice";
 import MyLogo from "../assest/eocmmerce.png";
 import ROLE from "../commun/role";
+import Context from "../context";
 
 const Header = () => {
   const user = useSelector((state) => state?.user?.user);
   const disptach = useDispatch();
   const navigate = useNavigate()
   const [menuDisplay, setMenuDisplay] = useState(false);
-
+const context = useContext(Context)
   const handlerLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
       method: SummaryApi.logout_user.method,
@@ -31,8 +32,9 @@ const Header = () => {
       toast.error(data.message);
     }
   };
+  console.log("Header att to cart", context)
   return (
-    <header className="h-16 shadow-md bg-white  sticky  z-50 top-0">
+    <header className="h-16 shadow-md bg-white  w-full fixed z-50 top-0">
       <div className=" h-full container mx-auto flex items-center px-4 justify-between">
         <div className="">
           <Link to={"/"}>
@@ -46,7 +48,7 @@ const Header = () => {
             className="w-full outline-none "
             placeholder="Rechercher un produit"
           />
-          <div className="text-lg w-13 h-8 min-w-[80px]  bg-red-400 flex items-center justify-center rounded-r-full text-white">
+          <div className="text-lg w-13 h-8 min-w-[80px]  bg-purple-400 flex items-center justify-center rounded-r-full text-white">
             <GrFormSearch />
           </div>
         </div>
@@ -91,15 +93,18 @@ const Header = () => {
               {" "}
               <BsCart4 />
             </span>
-            <div className="bg-red-400 h-5 rounded-full text-white w-5 p-1 items-center text-center justify-center absolute -top-2 -right-2">
-              <p className="text-sm">0</p>
+            {user?._id   && (
+              <div className="bg-red-400 h-5 rounded-full text-white w-5 p-1 items-center text-center justify-center absolute -top-2 -right-2">
+              <p className="text-sm">{context?.carProductCount}</p>
             </div>
+            )}
+            
           </div>
           <div>
             {user?._id ? (
               <button
                 onClick={handlerLogout}
-                className="px-3 py-1 rounded-full text-white bg-red-400 hover:bg-red-700"
+                className="px-3 py-1 rounded-full text-white bg-purple-400 hover:bg-purple-700"
               >
                 Déconnexion
               </button>
@@ -107,7 +112,7 @@ const Header = () => {
               <Link
                 to="/login"
                 type=""
-                className="px-3 py-1 rounded-full text-white bg-red-400 hover:bg-red-700"
+                className="px-3 py-1 rounded-full text-white bg-purple-400 hover:bg-purple-700"
               >
                 Login
               </Link>
