@@ -16,6 +16,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => {
@@ -34,11 +35,11 @@ const Login = () => {
         method: SummaryApi.signIn.method,
         credentials: "include",
         headers: {
-          "content-Type": "application/json",
+          "content-type": "application/json",
         },
         body: JSON.stringify(data),
       });
-
+ 
       const dataApi = await dataResponse.json();
       if (dataApi.success) {
         toast.success(dataApi.message);
