@@ -27,11 +27,14 @@ const userSignin = async (req, res) => {
       };
       const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, {
         expiresIn: 60 * 60 * 8});
-      const tokenOption = {
+      
+      
+        const tokenOption = {
         httpOnly: true,
         secure: true,
         sameSite:'None'
       };
+      
       res.cookie("token",token,tokenOption).status(200).json({
         message: "Connexion réussie",
         data: token,
