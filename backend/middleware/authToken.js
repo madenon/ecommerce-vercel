@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const authToken = async (req, res, next) => {
+const authToken = async (req,res,next) => {
   try {
     const token = req.cookies?.token
 
@@ -9,12 +9,14 @@ const authToken = async (req, res, next) => {
             message:"Vous devez vous connectez d'abord",
             error:true,
             success:false
+            // 
         })
     }
     jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
-      if(err){
-        console.log(err);
+      console.log(err);
         console.log("erreur: ", decoded)
+      if(err){
+        console.log('err', err);
     }
 
     req.userId = decoded?._id

@@ -18,9 +18,9 @@ const userSignin = async (req, res) => {
       throw new Error("Utilisateur non trouvé");
     }
 
-    const checkPassword = await bcrypt.compare(password, user.password);
+    const checkPassword = await bcrypt.compare(password,user.password);
 
-    if (checkPassword) {
+    if(checkPassword) {
       const tokenData = {
         _id: user._id,
         email: user.email,
@@ -31,7 +31,7 @@ const userSignin = async (req, res) => {
         httpOnly: true,
         secure: true,
       };
-      res.cookie("token",token,tokenOption).json({
+      res.cookie("token",token,tokenOption).status(200).json({
         message: "Connexion réussie",
         data: token,
         success: true,
