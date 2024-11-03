@@ -9,12 +9,15 @@ const app = express();
 const PORT = 8000 || process.env.PORT;
 
 connectDB();
-app.use(express.json());
+
 app.use(cors({
   origin:process.env.FROND_URL,
   credentials:true
 }));
+
+app.use(express.json());
 app.use(cookieParser())
+
 app.use("/api", router);
 
 app.get('/',(req, res)=>{
