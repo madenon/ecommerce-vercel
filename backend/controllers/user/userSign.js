@@ -32,6 +32,7 @@ const userSignin = async (req, res) => {
         const tokenOption = {
         httpOnly: true,
         secure: true,
+        maxAge: 86400,
         sameSite:"none"
       };
 
