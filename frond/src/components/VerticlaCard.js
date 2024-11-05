@@ -17,13 +17,13 @@ const VerticlaCard = ({loading, data=[]}) => {
 
     }
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,320px))] justify-between md:gap-6 overflow-x-scroll  scrollbar-none transition-all">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,300px))] justify-center md:justify-between md:gap-2 overflow-x-scroll scrollbar-none transition-all">
     {loading
       ? loadingList.map((product, index) => {
           return (
             <div
               key={index}
-              className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px]  md:max-w-[320px] bg-white rounded-sm shadow"
+              className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white rounded-sm shadow"
             >
               <div className="bg-slate-200  h-48 p-4   minw-[280px] md:min-w-[145px] flex justify-center items-center animate-pulse"></div>
               <div className="p-4 grid gap-3">
@@ -43,7 +43,7 @@ const VerticlaCard = ({loading, data=[]}) => {
             <Link
               to={"/product/"+ product._id}
               key={index}
-              className="w-full min-w-[280px]  md:min-w-[320px] max-w-[280px]  md:max-w-[320px] bg-white rounded-sm shadow" onClick={scrollTop}
+              className="w-full min-w-[280px]  md:min-w-[300px] max-w-[280px]  md:max-w-[300px] bg-white rounded-sm shadow" onClick={scrollTop}
             >
               <div className="bg-slate-200  h-48 p-4   minw-[280px] md:min-w-[145px] flex justify-center items-center">
                 <img

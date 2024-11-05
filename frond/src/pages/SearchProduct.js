@@ -29,7 +29,7 @@ const SearchProduct = () => {
         <p className='text-lg text-center'>Chargement...</p>
      )
 }
-        <p className="">Résultat de recherches {data.length} </p>
+        <p className="text-lg font-semibold">Résultat de recherches {data.length} </p>
      { data.length ===0 && loading && (
              <p className='bg-white text-lg text-center p-4'>Aucune donnée ne corresponds à vos recherches...</p>
      )}
