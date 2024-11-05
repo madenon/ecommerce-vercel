@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import fetchCategoryWiseProduct from "../helpers/fetchCategoryWiseProduct";
 import displayCurrency from "../helpers/displayCurrency";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaAngleLeft } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import addToCart from "../helpers/addToCart";
+import Context from "../context";
 
 const VerticalCardProduct = ({ category, heading }) => {
   const [data, setData] = useState([]);
@@ -12,6 +13,13 @@ const VerticalCardProduct = ({ category, heading }) => {
   const loadingList = new Array(16).fill(null);
   const [srcoll, setScroll] = useState(true);
   const scrollElement = useRef();
+
+  const { fetchUserAddToCart } = useContext(Context);
+
+  const handleAddToCart = async (e, id) => {
+    await addToCart(e,id);
+    fetchUserAddToCart();
+  };
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
@@ -102,7 +110,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                       {displayCurrency(product?.price)}{" "}
                     </p>
                   </div>
-                  <button className="text-sm bg-purple-600 hover:bg-purple-700 text-white px-3 py-0.5 rounded-full" onClick={(e)=>addToCart(e,product._id)}>
+                  <button className="text-sm bg-purple-600 hover:bg-purple-700 text-white px-3 py-0.5 rounded-full" onClick={(e)=>handleAddToCart(e,product._id)}>
                     Ajuter au panier
                   </button>
                 </div>

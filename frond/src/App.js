@@ -51,7 +51,7 @@ function App() {
           fetchUserAddToCart,// add to cart
         }}
       >
-        <ToastContainer />
+        <ToastContainer position="top-center" />
         <Header />
         <main className="min-h-[calc(100vh-120px)] pt-16">
           <Outlet />
