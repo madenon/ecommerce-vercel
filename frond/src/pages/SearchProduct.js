@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import SummaryApi from '../commun'
+import VerticlaCard from '../components/VerticlaCard'
 
 const SearchProduct = () => {
     const query = useLocation()
@@ -32,16 +33,14 @@ const SearchProduct = () => {
      { data.length ===0 && loading && (
              <p className='bg-white text-lg text-center p-4'>Aucune donnée ne corresponds à vos recherches...</p>
      )}
-     {/* {
+     {
         data.length !==0 && !loading &&(
-            data.map((product, index)=>{
-                return (
-                    <div>
-                        </div>
-                )
-            })
+                 
+                    <VerticlaCard loading={loading}  data={data}/>
+                
+            
         )
-     } */}
+     }
     </div>
   )
 }
