@@ -33,7 +33,7 @@ const Cart = () => {
   }, []);
 
   const increaseQty = async (id, qty) => {
-    const response = await fetch(SummaryApi.updateToCartProduct.url, {
+        const response = await fetch(SummaryApi.updateToCartProduct.url, {
       method: SummaryApi.updateToCartProduct.method,
       credentials: "include",
       headers: {
@@ -82,10 +82,12 @@ const Cart = () => {
         const responseData = await response.json();
         if (responseData.success) {
           fetchData();
+          context.fetchUserAddToCart()
         }
       
   }
-
+  const totalQty = data.reduce((previousValue, currentValue)=>previousValue + currentValue.quantity,0)
+const totalPrice = data.reduce((prev,curr)=>prev+(curr.quantity *curr?.productId?.sellingPrice),0)
   return (
     <div
       className="container mx-auto
@@ -124,9 +126,9 @@ const Cart = () => {
                       object-scale-down mix-blend-multiply"
                       />
                     </div>
-                    <div className="px-4 py-2 relative">
+                    <div className="px-4 py-2 relative shadow">
                       {/* delete product */}
-                      <div className="absolute right-0 text-red-600 rounded-full p-2 cursor-pointer hover:bg-red-600 hover:text-white"
+                      <div className="absolute right-0 text-red-600 rounded-full  flex justify-between cursor-pointer hover:bg-red-600 hover:text-white"
                       onClick={()=>deletCartProduct(product?._id)}>
                         <MdDelete />
                       </div>
@@ -136,9 +138,16 @@ const Cart = () => {
                       <p className="capitalize text-slate-500">
                         {product?.productId?.category}
                       </p>
-                      <p className="text-red-600 font-medium text-lg">
+                     <div className="flex items-center justify-between">
+                     <p className="text-red-600 font-medium text-lg">
                         {displayCurrency(product?.productId?.sellingPrice)}
                       </p>
+                      <p className="text-slate-600 font-semibold text-lg">
+                        {displayCurrency(product?.productId?.sellingPrice * product?.quantity)}
+                      </p>
+
+                      
+                        </div>
                       <div className="flex items-center gap-3 mt-2">
                         <button
                           className="border  border-purple-600 hover:bg-purple-600 hover:text-white text-purple-600 w-6 h-6 justify-between items-center rounded"
@@ -170,7 +179,18 @@ const Cart = () => {
               total
             </div>
           ) : (
-            <div className="h-36 bg-slate-200">total</div>
+            <div className="h-36 bg-white">
+                <h2 className="text-white bg-purple-600 px-4 py-1">Resumé  de commande</h2>
+                <div className="flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600">
+                    <p className="">Quantité :</p>
+                    <p>{totalQty}</p>
+            </div>
+            <div className="flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600">
+                <p>Prix total:</p>
+                <p>{displayCurrency(totalPrice)}</p>
+            </div>
+            <button className="bg-blue-600 p-2 text-white w-full">Payement</button>
+            </div>
           )}
         </div>
       </div>
