@@ -13,10 +13,11 @@ const authToken = async (req,res,next) => {
         })
     }
     jwt.verify(token, process.env.TOKEN_SECRET_KEY, function (err, decoded) {
-      console.log(err);
-        console.log("erreur: ", decoded)
+      
       if(err){
         console.log('err', err);
+        console.log(err);
+        console.log("erreur: ", decoded)
     }
 
     req.userId = decoded?._id

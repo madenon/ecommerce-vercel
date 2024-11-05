@@ -46,9 +46,9 @@ function App() {
     <>
       <Context.Provider
         value={{
-          fetchUserDetails,
-          carProductCount,
-          fetchUserAddToCart
+          fetchUserDetails,// user details
+          carProductCount,// current user 
+          fetchUserAddToCart,// add to cart
         }}
       >
         <ToastContainer />
