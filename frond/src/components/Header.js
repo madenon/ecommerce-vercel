@@ -88,7 +88,7 @@ const context = useContext(Context)
             )}
           </div>
 
-          <div className="text-2xl relative">
+          <Link to={"/cart"} className="text-2xl relative">
             <span className="">
               {" "}
               <BsCart4 />
@@ -99,7 +99,7 @@ const context = useContext(Context)
             </div>
             )}
             
-          </div>
+          </Link>
           <div>
             {user?._id ? (
               <button
