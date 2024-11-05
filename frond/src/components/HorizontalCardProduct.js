@@ -115,7 +115,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
                     </div>
                     <button className="text-sm bg-purple-600 hover:bg-purple-700 text-white px-3 py-0.5 rounded-full"
                     onClick={(e)=>handleAddToCart(e,product._id)}>
-                      Ajuter au panier
+                      Ajouter au panier
                     </button>
                   </div>
                 </Link>

@@ -182,7 +182,7 @@ const ProductDetails = () => {
               <button className="border-2 border-red-400 rounded px-3 py-1 uppercase min-w-[120px] text-red-600 font-medium hover:bg-red-500  hover:text-white">
                 Acheter
               </button>
-              <button className="border-2 border-red-400 rounded px-3 py-1 min-w-[120px] uppercase font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white">
+              <button className="border-2  border-red-400 rounded px-3 py-1 min-w-[120px] uppercase font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white">
                 Ajouter au panier
               </button>
             </div>
