@@ -20,7 +20,7 @@ const ProductDetails = () => {
 
   const params = useParams();
   const [loading, setLoading] = useState(true);
-  const productImageListLoading = new Array(5).fill(null);
+  const productImageListLoading = new Array(7).fill(null);
   const [activeImage, setActiveImage] = useState("");
   const [zoomImageCoordinate, setZoomImageCoordinate] = useState({
     x: 0,

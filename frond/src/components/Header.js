@@ -32,7 +32,17 @@ const context = useContext(Context)
       toast.error(data.message);
     }
   };
-  console.log("Header att to cart", context)
+
+  const handleSearch = (e) =>{
+    const {value} = e.target
+    if(value){
+      navigate(`/search?q=${value}`)
+    }else{
+      navigate("/search")
+    }
+
+  }
+
   return (
     <header className="h-16 shadow-md bg-white  w-full fixed z-50 top-0">
       <div className=" h-full container mx-auto flex items-center px-4 justify-between">
@@ -47,6 +57,7 @@ const context = useContext(Context)
             type="text"
             className="w-full outline-none "
             placeholder="Rechercher un produit"
+            onChange={handleSearch}
           />
           <div className="text-lg w-13 h-8 min-w-[80px]  bg-purple-400 flex items-center justify-center rounded-r-full text-white">
             <GrFormSearch />

@@ -2,8 +2,8 @@ const userLoogout = async (req, res) => {
   try {
     const tokenOption = {
       httpOnly: true,
-      sameSite:'None',
       secure: true,
+      sameSite:'None',
     };
 
   
