@@ -1,11 +1,75 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import productCategory from "../helpers/productCategory";
+import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
+import VerticlaCard from "../components/VerticlaCard";
+import SummaryApi from "../commun";
 
 const CategoryProduct = () => {
   const params = useParams();
-  const [data, setData] = useState([])
-  const [loading, setLoading]  = useState(false)
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const urlSearch = new URLSearchParams(location.search);
+  const urlCategoryLisArray = urlSearch.getAll("category");
+  const urlCategoryListObject = {};
+  urlCategoryLisArray.forEach((el) => {
+    urlCategoryListObject[el] = true;
+  });
+
+  const [selectCategory, setSelectCategory] = useState(urlCategoryListObject);
+  const [filterCategoryList, setFilterCategoryList] = useState([]);
+
+  const fetchData = async () => {
+    const response = await fetch(SummaryApi.filterProduct.url, {
+      method: SummaryApi.filterProduct.method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        category: filterCategoryList,
+      }),
+    });
+    const dataResponse = await response.json();
+
+    setData(dataResponse?.data || []);
+  };
+
+  const handleSelectCategory = (e) => {
+    const { name, value, checked } = e.target;
+    setSelectCategory((prev) => {
+      return {
+        ...prev,
+        [value]: checked,
+      };
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [filterCategoryList]);
+  useEffect(() => {
+    const arrayOfCategory = Object.keys(selectCategory)
+      .map((categoryKeyName) => {
+        if (selectCategory[categoryKeyName]) {
+          return categoryKeyName;
+        }
+        return null;
+      })
+      .filter((el) => el);
+    setFilterCategoryList(arrayOfCategory);
+    //url weh yu change checbox 
+    const urlFormat = arrayOfCategory.map((el) => {
+      if (arrayOfCategory.length === 1) {
+        return `category=${el}`;
+      }
+      return `category=${el}&&`;
+    });
+    console.log(urlFormat, "urlFormat::::")
+    navigate("/product-category?");
+  }, [selectCategory]);
+
   // console.log(params)
   return (
     <div className="container mx-auto p-4">
@@ -13,7 +77,7 @@ const CategoryProduct = () => {
       <div className="hidden lg:grid grid-cols-[200px,1fr]">
         {/* left side */}
         <div className="bg-white p-2 min-h-[calc(100vh-120px)] overflow-y-scroll">
-         {/* Sort By */}
+          {/* Sort By */}
           <div className="">
             <h3
               className="text-base uppercase font-medium text-slate-500
@@ -34,8 +98,6 @@ const CategoryProduct = () => {
             </form>
           </div>
 
-
-
           {/* Filter By */}
           <div className="">
             <h3
@@ -45,24 +107,33 @@ const CategoryProduct = () => {
               Catégorie
             </h3>
             <form className="text-sm flex-col gap-2 py-2">
-              {
-                productCategory?.map((catgeoryName, index)=>{
-                  return (
-                    <div className="flex items-center gap-3">
-                      <input type="checkbox" name={"category"} id={catgeoryName?.value} />
-                      <label htmlFor={catgeoryName?.value}>{catgeoryName.label}</label>
-                    </div>
-                  )
-                })
-              }
-
-          
+              {productCategory?.map((catgeoryName, index) => {
+                return (
+                  <div key={index} className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      name={"category"}
+                      id={catgeoryName?.value}
+                      onChange={handleSelectCategory}
+                      checked={selectCategory[catgeoryName?.value]}
+                      value={catgeoryName?.value}
+                    />
+                    <label htmlFor={catgeoryName?.value}>
+                      {catgeoryName?.label}
+                    </label>
+                  </div>
+                );
+              })}
             </form>
           </div>
         </div>
 
         {/* right side */}
-        <div>display product</div>
+        <div>
+          {data.length !== 0 && !loading && (
+            <VerticlaCard data={data} loading={loading} />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ import { addToCartViewProduct } from "../controllers/user/addToCartViewProduct.j
 import { updateAddTotCartProduct } from "../controllers/user/updateAddTotCartProduct.js";
 import { deleteAddToCart } from "../controllers/user/deleteAddToCart.js";
 import { searchProduct } from "../controllers/product/searchProduct.js";
+import { filterProduct } from "../controllers/product/filterProduct.js";
 
 const router = express.Router();
 router.post("/signup", userSignup);
@@ -37,6 +38,7 @@ router.get("/get-category-product",  getCategoryProduct);
 router.post("/category-product",  getCategoryWiseProduct);
 router.post("/product-details",  getProductDetails);
 router.get("/search",  searchProduct);
+router.post("/filter-product",  filterProduct);
 
 // Ajouter au panier
 router.post("/addtocart", authToken, addToCart);
