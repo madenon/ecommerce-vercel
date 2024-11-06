@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SummaryApi from "../commun";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
 import displayCurrency from "../helpers/displayCurrency";
-import VerticalCardProduct from "../components/VerticalCardProduct";
 import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
+import addToCart from "../helpers/addToCart";
+import Context from "../context";
 
 const ProductDetails = () => {
   const [data, setData] = useState({
@@ -19,6 +20,8 @@ const ProductDetails = () => {
   });
 
   const params = useParams();
+  const { fetchUserAddToCart } = useContext(Context);
+
   const [loading, setLoading] = useState(true);
   const productImageListLoading = new Array(7).fill(null);
   const [activeImage, setActiveImage] = useState("");
@@ -69,6 +72,13 @@ const ProductDetails = () => {
   const handleLeaveImageZoom = () => {
     setZoomImage(false);
   };
+
+
+  const handleAddToCard = async(e,id)=>{
+    await addToCart(e, id)
+    fetchUserAddToCart()
+
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -179,7 +189,7 @@ const ProductDetails = () => {
               <p className="line-through">{displayCurrency(data.price)}</p>
             </div>
             <div className="flex items-center gap-3 my-2">
-              <button className="border-2 border-red-400 rounded px-3 py-1 uppercase min-w-[120px] text-red-600 font-medium hover:bg-red-500  hover:text-white">
+              <button className="border-2 border-red-400 rounded px-3 py-1 uppercase min-w-[120px] text-red-600 font-medium hover:bg-red-500  hover:text-white" onClick={(e)=>handleAddToCard(e,data?._id)} >
                 Acheter
               </button>
               <button className="border-2  border-red-400 rounded px-3 py-1 min-w-[120px] uppercase font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white">

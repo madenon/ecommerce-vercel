@@ -18,7 +18,9 @@ const Header = () => {
   const [menuDisplay, setMenuDisplay] = useState(false);
   const context = useContext(Context);
   const searchInput = useLocation()
-  const [search, setSearch] =useState(searchInput?.search?.split("=")[1])
+  const urlSearch = new URLSearchParams(searchInput?.search)
+  const searchQuery = urlSearch.getAll("q")
+  const [search, setSearch] =useState(searchQuery)
 
   const handlerLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {

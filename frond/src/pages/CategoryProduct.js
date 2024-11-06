@@ -18,6 +18,7 @@ const CategoryProduct = () => {
 
   const [selectCategory, setSelectCategory] = useState(urlCategoryListObject);
   const [filterCategoryList, setFilterCategoryList] = useState([]);
+  const [sortBy, setSortBy] = useState("");
 
   const fetchData = async () => {
     const response = await fetch(SummaryApi.filterProduct.url, {
@@ -57,17 +58,32 @@ const CategoryProduct = () => {
       })
       .filter((el) => el);
     setFilterCategoryList(arrayOfCategory);
-    //url weh yu change checbox 
-    const urlFormat = arrayOfCategory.map((el,index) => {
-      if ((arrayOfCategory.length -1) ===index) {
-        return `category=%${el}`;
+    //url weh yu change checbox
+    const urlFormat = arrayOfCategory.map((el, index) => {
+      if (arrayOfCategory.length - 1 === index) {
+        return `category=${el}`;
       }
-      return `category=%${el}&&`;
+      return `category=${el}&&`;
     });
 
-    navigate("/product-category?"+urlFormat.join(""));
+    navigate("/product-category?" + urlFormat.join(""));
   }, [selectCategory]);
 
+  const handleOnchangeSortBy = (e) => {
+    const { value } = e.target;
+    setSortBy(value)
+    if(value ==='asc'){
+      setData(prev=>prev.sort((a,b)=>a.sellingPrice - b.sellingPrice))
+    }
+    if(value ==='desc'){
+      setData(prev=>prev.sort((a,b)=>b.sellingPrice - a.sellingPrice))
+    }
+  };
+
+
+  useEffect(()=>{
+
+  },[sortBy])
   return (
     <div className="container mx-auto p-4">
       {/* desktop version */}
@@ -84,12 +100,25 @@ const CategoryProduct = () => {
             </h3>
             <form className="text-sm flex-col gap-2 py-2">
               <div className="flex items-center gap-2">
-                <input type="radio" name="sortBy" className="" />
+                <input
+                  type="radio"
+                  name="sortBy"
+                  value={"asc"}
+                  checked={sortBy ==='asc'}
+
+                  onChange={handleOnchangeSortBy}
+                />
                 <label>Prix ​​- du plus bas au plus élevé</label>
               </div>
 
               <div className="flex items-center gap-2">
-                <input type="radio" name="sortBy" className="" />
+                <input
+                  type="radio"
+                  name="sortBy"
+                  value={'desc'}
+                  checked={sortBy =='desc'}
+                  onChange={handleOnchangeSortBy}
+                />
                 <label>Prix ​​- du plus élevé au plus bas </label>
               </div>
             </form>
@@ -126,12 +155,15 @@ const CategoryProduct = () => {
         </div>
 
         {/* right side */}
-        <div>
-          <p> {data.length} corresponds aux résultat à recherches : </p>
-          <div>
-          {data.length !== 0 && (
-            <VerticlaCard data={data} loading={loading} />
-          )}
+        <div className="px-4">
+          <p className="font-medium text-slate-800 text-lg my-2">
+            {" "}
+            {data.length} elements corresponds aux résultat à recherches
+          </p>
+          <div className="min-h-[calc(100vh-120px)] overflow-y-scroll max-h-[calc(100vh-120px)]">
+            {data.length !== 0 && (
+              <VerticlaCard data={data} loading={loading} />
+            )}
           </div>
         </div>
       </div>
