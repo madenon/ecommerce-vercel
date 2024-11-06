@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import productCategory from "../helpers/productCategory";
-import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
 import VerticlaCard from "../components/VerticlaCard";
 import SummaryApi from "../commun";
 
 const CategoryProduct = () => {
-  const params = useParams();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -67,11 +65,9 @@ const CategoryProduct = () => {
       return `category=%${el}&&`;
     });
 
-    console.log(urlFormat.join(""), "urlFormat::::")
     navigate("/product-category?"+urlFormat.join(""));
   }, [selectCategory]);
 
-  // console.log(params)
   return (
     <div className="container mx-auto p-4">
       {/* desktop version */}
@@ -131,9 +127,12 @@ const CategoryProduct = () => {
 
         {/* right side */}
         <div>
-          {data.length !== 0 && !loading && (
+          <p> {data.length} corresponds aux résultat à recherches : </p>
+          <div>
+          {data.length !== 0 && (
             <VerticlaCard data={data} loading={loading} />
           )}
+          </div>
         </div>
       </div>
     </div>
