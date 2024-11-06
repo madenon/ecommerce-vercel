@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { GrFormSearch } from "react-icons/gr";
 import { FaUserCircle } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../commun";
 import { toast } from "react-toastify";
@@ -14,9 +14,13 @@ import Context from "../context";
 const Header = () => {
   const user = useSelector((state) => state?.user?.user);
   const disptach = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [menuDisplay, setMenuDisplay] = useState(false);
-const context = useContext(Context)
+  const context = useContext(Context);
+  const searchInput = useLocation()
+  const [search, setSearch] =useState(searchInput?.search?.split("=")[1])
+  console.log("searchInputsearchInput", searchInput?.search.split("=")[1])
+
   const handlerLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
       method: SummaryApi.logout_user.method,
@@ -26,22 +30,22 @@ const context = useContext(Context)
     if (data.success) {
       toast.success(data.message);
       disptach(setUserDetails(null));
-      navigate("/")
+      navigate("/");
     }
     if (data.error) {
       toast.error(data.message);
     }
   };
 
-  const handleSearch = (e) =>{
-    const {value} = e.target
-    if(value){
-      navigate(`/search?q=${value}`)
-    }else{
-      navigate("/search")
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearch(value)
+    if (value) {
+      navigate(`/search?q=${value}`);
+    } else {
+      navigate("/search");
     }
-
-  }
+  };
 
   return (
     <header className="h-16 shadow-md bg-white  w-full fixed z-50 top-0">
@@ -58,6 +62,7 @@ const context = useContext(Context)
             className="w-full outline-none "
             placeholder="Rechercher un produit"
             onChange={handleSearch}
+            value={search}
           />
           <div className="text-lg w-13 h-8 min-w-[80px]  bg-purple-400 flex items-center justify-center rounded-r-full text-white">
             <GrFormSearch />
@@ -104,12 +109,11 @@ const context = useContext(Context)
               {" "}
               <BsCart4 />
             </span>
-            {user?._id   && (
+            {user?._id && (
               <div className="bg-red-400 h-5 rounded-full text-white w-5 p-1 items-center text-center justify-center absolute -top-2 -right-2">
-              <p className="text-sm">{context?.carProductCount}</p>
-            </div>
+                <p className="text-sm">{context?.carProductCount}</p>
+              </div>
             )}
-            
           </Link>
           <div>
             {user?._id ? (
