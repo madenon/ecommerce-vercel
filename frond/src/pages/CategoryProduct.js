@@ -60,14 +60,15 @@ const CategoryProduct = () => {
       .filter((el) => el);
     setFilterCategoryList(arrayOfCategory);
     //url weh yu change checbox 
-    const urlFormat = arrayOfCategory.map((el) => {
-      if (arrayOfCategory.length === 1) {
-        return `category=${el}`;
+    const urlFormat = arrayOfCategory.map((el,index) => {
+      if ((arrayOfCategory.length -1) ===index) {
+        return `category=%${el}`;
       }
-      return `category=${el}&&`;
+      return `category=%${el}&&`;
     });
-    console.log(urlFormat, "urlFormat::::")
-    navigate("/product-category?");
+
+    console.log(urlFormat.join(""), "urlFormat::::")
+    navigate("/product-category?"+urlFormat.join(""));
   }, [selectCategory]);
 
   // console.log(params)
