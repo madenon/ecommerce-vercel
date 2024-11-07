@@ -74,6 +74,8 @@ const Login = () => {
                   onChange={handleOnChange}
                   placeholder="entrer votre email"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-email"
+                  
                 />
               </div>
             </div>

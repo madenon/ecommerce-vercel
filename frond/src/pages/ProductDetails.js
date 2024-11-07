@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SummaryApi from "../commun";
 import { FaStar } from "react-icons/fa6";
 import { FaStarHalf } from "react-icons/fa6";
@@ -9,6 +9,7 @@ import addToCart from "../helpers/addToCart";
 import Context from "../context";
 
 const ProductDetails = () => {
+  const navigate = useNavigate()
   const [data, setData] = useState({
     productName: "",
     brandName: "",
@@ -77,9 +78,15 @@ const ProductDetails = () => {
   const handleAddToCard = async(e,id)=>{
     await addToCart(e, id)
     fetchUserAddToCart()
-
+    
   }
-
+  
+  const handleByProduct = async(e,id)=>{
+    await addToCart(e, id)
+    fetchUserAddToCart()
+    navigate("/cart")
+  }
+  
   return (
     <div className="container mx-auto p-4">
       <div className=" min-h-[200px] flex flex-col lg:flex-row gap-4">
@@ -189,10 +196,10 @@ const ProductDetails = () => {
               <p className="line-through">{displayCurrency(data.price)}</p>
             </div>
             <div className="flex items-center gap-3 my-2">
-              <button className="border-2 border-red-400 rounded px-3 py-1 uppercase min-w-[120px] text-red-600 font-medium hover:bg-red-500  hover:text-white" onClick={(e)=>handleAddToCard(e,data?._id)} >
+              <button className="border-2 border-red-400 rounded px-3 py-1 uppercase min-w-[120px] text-red-600 font-medium hover:bg-red-500  hover:text-white" onClick={(e)=>handleByProduct(e,data?._id)} >
                 Acheter
               </button>
-              <button className="border-2  border-red-400 rounded px-3 py-1 min-w-[120px] uppercase font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white">
+              <button className="border-2  border-red-400 rounded px-3 py-1 min-w-[120px] uppercase font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white" onClick={(e)=>handleAddToCard(e,data?._id)}>
                 Ajouter au panier
               </button>
             </div>

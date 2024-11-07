@@ -104,6 +104,8 @@ const Register = () => {
                   onChange={handleOnChange}
                   placeholder="entrer votre Nom complet"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-name"
+
                 />
               </div>
             </div>
@@ -117,6 +119,8 @@ const Register = () => {
                   onChange={handleOnChange}
                   placeholder="entrer votre email"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-email"
+
                 />
               </div>
             </div>
@@ -130,6 +134,8 @@ const Register = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="entrer votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-password"
+
                 />
                 <div
                   className="cursor-pointer text-xl"
@@ -150,6 +156,8 @@ const Register = () => {
                   type={showConfirPassword ? "text" : "password"}
                   placeholder="Confirmez votre mot de passe"
                   className="w-full h-full outline-none bg-transparent"
+                  autoComplete="current-password2"
+
                 />
                 <div
                   className="cursor-pointer text-xl"
