@@ -10,6 +10,8 @@ import { setUserDetails } from "../store/userSlice";
 import MyLogo from "../assest/eocmmerce.png";
 import ROLE from "../commun/role";
 import Context from "../context";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 const Header = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -70,6 +72,7 @@ const Header = () => {
             <GrFormSearch />
           </div>
         </div>
+        
 
         <div className="flex items-center gap-7">
           <div className="relative flex justify-center">
@@ -105,6 +108,12 @@ const Header = () => {
               </div>
             )}
           </div>
+          <Link to={"/about"} className="font-semibold text-purple-300 hover:text-purple-700">
+          <About />
+          </Link>
+          <Link to={"/contact"} className="font-semibold text-purple-300 hover:text-purple-700">
+          <Contact />
+          </Link>
 
           <Link to={"/cart"} className="text-2xl relative">
             <span className="">
