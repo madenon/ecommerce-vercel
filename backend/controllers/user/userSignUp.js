@@ -4,7 +4,7 @@ import userModel from "../../models/userModel.js"
 const userSignup = async (req, res) => {
 
     try {
-        const {name, email, password,password2,profilePic} = req.body
+        const {name, email, password,password2} = req.body
         
         
         if(!email){

@@ -5,9 +5,6 @@ const userLoogout = async (req, res) => {
       secure: true,
       sameSite:'None',
     };
-
-  
-
     res.clearCookie("token", tokenOption);
 
     res.status(200).json({
