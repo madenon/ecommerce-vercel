@@ -6,9 +6,7 @@ const userSignup = async (req, res) => {
     try {
         const {name, email, password,password2,profilePic} = req.body
         
-        if(!profilePic){
-            throw new Error("chargé une image")
-        }
+        
         if(!email){
             throw new Error("Entrer un email valide")
         }
