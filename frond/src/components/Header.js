@@ -52,23 +52,23 @@ const Header = () => {
 
   return (
     <header className="h-16 shadow-md bg-white  w-full fixed z-50 top-0">
-      <div className=" h-full container mx-auto flex items-center px-4 justify-between">
+      <div className="h-full container mx-auto flex items-center  justify-between">
         <div className="">
           <Link to={"/"}>
             {/* <Logo  /> */}
-            <img src={MyLogo} alt="" className="rounded-full w-10 h-10" />
+            <img src={MyLogo} alt="" className="rounded-full w-24 h-10" />
           </Link>
         </div>
-        <div className="flex max-w-sm w-full border justify-between  m-2 rounded-full items-center focus:shadow gap-3">
+        <div className="flex max-w-sm w-full xs:-mr-4 border justify-between  rounded-full items-center focus:shadow">
 
           <input
             type="text"
-            className="w-full outline-none "
+            className="w-full outline-none"
             placeholder="Rechercher un produit"
             onChange={handleSearch}
             value={search}
           />
-          <div className="text-lg w-13 h-8 min-w-[80px]  bg-purple-400 flex items-center justify-center rounded-r-full text-white">
+          <div className="text-lg w-12 h-8 min-w-[20px] bg-purple-400 flex items-center justify-center rounded-r-full text-white">
             <GrFormSearch />
           </div>
         </div>
@@ -108,14 +108,14 @@ const Header = () => {
               </div>
             )}
           </div>
-          <Link to={"/about"} className="font-semibold text-purple-300 hover:text-purple-700">
+          <Link to={"/about"} className="font-semibold text-purple-300 sx:-mr-4 hover:text-purple-700">
           <About />
           </Link>
-          <Link to={"/contact"} className="font-semibold text-purple-300 hover:text-purple-700">
+          <Link to={"/contact"} className="font-semibold xs:-mr-4 text-purple-300 hover:text-purple-700">
           <Contact />
           </Link>
 
-          <Link to={"/cart"} className="text-2xl relative">
+          <Link to={"/cart"} className="text-2xl relative xs:-mr-4">
             <span className="">
               {" "}
               <BsCart4 />
@@ -130,7 +130,7 @@ const Header = () => {
             {user?._id ? (
               <button
                 onClick={handlerLogout}
-                className="px-3 py-1 rounded-full text-white bg-purple-400 hover:bg-purple-700"
+                className="px-3 py-1 xs:-mr-2 rounded-full text-white bg-purple-400 hover:bg-purple-700"
               >
                 Déconnexion
               </button>

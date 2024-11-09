@@ -13,6 +13,8 @@ import Cart from "../pages/Cart";
 import SearchProduct from "../pages/SearchProduct";
 import Contact from "../pages/Contact";
 import About from "../pages/About";
+import Cancel from "../pages/Cancel";
+import Successfully from "../pages/Successfully";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,8 @@ const router = createBrowserRouter([
       { path: "/product-category", element: <CategoryProduct /> },
       { path: "/product/:id", element: <ProductDetails /> },
       { path: "/cart", element: <Cart /> },
+      { path: "/success", element: <Successfully /> },
+      { path: "/cancel", element: <Cancel /> },
       { path: "/search", element: <SearchProduct /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },

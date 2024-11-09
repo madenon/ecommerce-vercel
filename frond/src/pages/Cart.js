@@ -3,6 +3,7 @@ import SummaryApi from "../commun";
 import Context from "../context";
 import displayCurrency from "../helpers/displayCurrency";
 import { MdDelete } from "react-icons/md";
+import {loadStripe} from '@stripe/stripe-js';
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -98,6 +99,25 @@ const Cart = () => {
     (prev, curr) => prev + curr.quantity * curr?.productId?.sellingPrice,
     0
   );
+
+  const hanldePayment = async() =>{
+    const stripeUrl = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+    const stripePromise= await loadStripe(`${stripeUrl}`)
+    const response = await fetch(SummaryApi.payments.url,{
+      method:SummaryApi.payments.method,
+      credentials:"include",
+        headers:{
+          "content-type":"application/json"
+        },
+        body:JSON.stringify({cartItems:data})
+    })
+    const responseData = await response.json()
+    if(responseData?.id){
+      stripePromise.redirectToCheckout({sessionId:responseData.id})
+    }
+  }
+
+
   return (
     <div
       className="container mx-auto
@@ -185,7 +205,9 @@ const Cart = () => {
               })}
         </div>
         {/* Sumary */}
-        <div className="mt-5 lg:mt-0 w-full max-w-sm">
+        {
+          data[0] &&(
+<div className="mt-5 lg:mt-0 w-full max-w-sm">
           {loading ? (
             <div className="h-36 bg-slate-200 border border-slate-300 animate-pulse">
               total
@@ -203,12 +225,15 @@ const Cart = () => {
                 <p>Prix total:</p>
                 <p>{displayCurrency(totalPrice)}</p>
               </div>
-              <button className="bg-blue-600 p-2 text-white w-full">
+              <button className="bg-blue-600 p-2 text-white w-full" onClick={hanldePayment}>
                 Payement
               </button>
             </div>
           )}
         </div>
+          )
+        }
+        
       </div>
     </div>
   );

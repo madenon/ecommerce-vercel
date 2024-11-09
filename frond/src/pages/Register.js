@@ -61,7 +61,6 @@ const Register = () => {
 
   const handleUploadPic = async (e) => {
     const file = e.target.files[0];
-
     const imagePic = await imageTobase64(file);
     setData((prev) => {
       return {
@@ -77,7 +76,7 @@ const Register = () => {
         <div className="bg-white p-4w-full max-w-sm mx-auto">
           <div className="w-20 h-20  mx-auto relative overflow-hidden rounded-full">
             <div>
-              <img src={data.profilePic || loginIcons} alt="Icon login" />
+              <img src={data?.profilePic || loginIcons} alt="Icon login" />
             </div>
             <form>
               <label>
@@ -88,6 +87,7 @@ const Register = () => {
                   type="file"
                   className="hidden"
                   onChange={handleUploadPic}
+                  
                 />
               </label>
             </form>
