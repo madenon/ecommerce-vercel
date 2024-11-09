@@ -6,7 +6,7 @@ const authToken = async (req,res,next) => {
 
     if(!token){
         return res.status(200).json({
-            message:"Vous devez vous connectez d'abord",
+            message:"Vous devez vous connectez d'abord ou créer un compte",
             error:true,
             success:false
             // 
