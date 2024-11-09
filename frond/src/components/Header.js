@@ -57,7 +57,8 @@ const Header = () => {
             <img src={MyLogo} alt="" className="rounded-full w-10 h-10" />
           </Link>
         </div>
-        <div className="hidden lg:flex  w-full justify-between max-w-sm border rounded-full items-center focus:shadow pl-2">
+        <div className="flex max-w-sm w-full border justify-between  m-2 rounded-full items-center focus:shadow gap-3">
+
           <input
             type="text"
             className="w-full outline-none "
