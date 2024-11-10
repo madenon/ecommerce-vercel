@@ -42,7 +42,8 @@ const OrderPage = () => {
                       <div className="">{product.name}</div>
                       <div className="flex items-center gap-5">
                         <div className="">{displayCurrency(product.price)}</div>
-                        <div className="">Quantité :{product.quantity}</div>
+                        <p className="">Quantité :{product.quantity}</p>
+                     
                       </div>
                     </div>
                   );
@@ -52,6 +53,8 @@ const OrderPage = () => {
               <div>
                 <div>
                   Détails de Payement:
+                  <p className="">Methode de payement :{item?.paymentDetails.payment_method_type[0]}</p>
+                  <p>Statut de payment : {item?.paymentDetails.payment_status}</p>
             </div>
             </div>
             </div>
