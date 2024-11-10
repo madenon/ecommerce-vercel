@@ -1,4 +1,5 @@
 import { stripe } from "../../config/stripe.js";
+import addToCartModel from "../../models/cartProduct.js";
 import orderModel from "../../models/orderModel.js";
 
 const endpointSecret = process.env.STIPR_ENDPOINT_WEBHOOK_SECRET_KEY;
@@ -69,11 +70,15 @@ const webhooks = async (request, response) => {
         shipping_options:session.shipping_options.map(s=>{ 
             return {...s,shipping_amount:s.shipping_amount /100}
         }),
-        totalAmount:session.amount_total
+        totalAmount:session.amount_total/100
 
       }
       const order = new  orderModel(orderDetails)
-      const saveOrder = await order.save()
+      const saveOrder = await order.save();
+      if(saveOrder?._id){
+        const  deleteCartIems =  await addToCartModel.deleteMany({userId:session.metadata.userId})
+      
+      }
 
 
       break;
