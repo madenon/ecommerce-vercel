@@ -26,7 +26,7 @@ const OrderPage = () => {
       <div className="p-4 w-full ">
         {data.map((item, index) => {
           return (
-            <div key={item.userId + index} className="mt-3 gap-3">
+            <div key={item.userId + index} className="mt-2 gap-3">
               <p className="font-medium text-lg">
                 {moment(item.createdAt).format("LL")}
               </p>
@@ -61,7 +61,7 @@ const OrderPage = () => {
                   })}
                 </div>
 
-                <div className="flex flex-col  gap-4 p-2 min-w-[320px]">
+                <div className="flex flex-col lg:flex-row justify-between">
                   <div>
                     <div className="text-lg font-medium">
                       Détails de Payement:{" "}
@@ -77,7 +77,7 @@ const OrderPage = () => {
                 </div>
                   </div>
 
-                <div className="font-semibold ml-auto w-fit lg:text-lg min-w-[320px]">
+                <div className="font-semibold ml-auto w-fit lg:text-lg">
                   Total de vos achats :{displayCurrency(item.totalAmount)}
                 </div>
               </div>
