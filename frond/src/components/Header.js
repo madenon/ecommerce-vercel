@@ -19,10 +19,10 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuDisplay, setMenuDisplay] = useState(false);
   const context = useContext(Context);
-  const searchInput = useLocation()
-  const urlSearch = new URLSearchParams(searchInput?.search)
-  const searchQuery = urlSearch.getAll("q")
-  const [search, setSearch] =useState(searchQuery)
+  const searchInput = useLocation();
+  const urlSearch = new URLSearchParams(searchInput?.search);
+  const searchQuery = urlSearch.getAll("q");
+  const [search, setSearch] = useState(searchQuery);
 
   const handlerLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -42,7 +42,7 @@ const Header = () => {
 
   const handleSearch = (e) => {
     const { value } = e.target;
-    setSearch(value)
+    setSearch(value);
     if (value) {
       navigate(`/search?q=${value}`);
     } else {
@@ -60,7 +60,6 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex max-w-sm w-full xs:-mr-4 border justify-between  rounded-full items-center focus:shadow">
-
           <input
             type="text"
             className="w-full outline-none"
@@ -72,7 +71,6 @@ const Header = () => {
             <GrFormSearch />
           </div>
         </div>
-        
 
         <div className="flex items-center gap-7">
           <div className="relative flex justify-center">
@@ -104,15 +102,28 @@ const Header = () => {
                       Admin Panel
                     </Link>
                   )}
+                  <Link
+                    to={"/order"}
+                    className="whitespace-nowrap md:block hover:bg-slate-100 p-2"
+                    onClick={() => setMenuDisplay((preve) => !preve)}
+                  >
+                    Mes commandes
+                  </Link>
                 </nav>
               </div>
             )}
           </div>
-          <Link to={"/about"} className="font-semibold text-purple-300 sx:-mr-4 hover:text-purple-700">
-          <About />
+          <Link
+            to={"/about"}
+            className="font-semibold text-purple-300 sx:-mr-4 hover:text-purple-700"
+          >
+            <About />
           </Link>
-          <Link to={"/contact"} className="font-semibold xs:-mr-4 text-purple-300 hover:text-purple-700">
-          <Contact />
+          <Link
+            to={"/contact"}
+            className="font-semibold xs:-mr-4 text-purple-300 hover:text-purple-700"
+          >
+            <Contact />
           </Link>
 
           <Link to={"/cart"} className="text-2xl relative xs:-mr-4">
