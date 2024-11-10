@@ -15,6 +15,7 @@ import Contact from "../pages/Contact";
 import About from "../pages/About";
 import Cancel from "../pages/Cancel";
 import Successfully from "../pages/Successfully";
+import OrderPage from "../pages/OrderPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: "/search", element: <SearchProduct /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
+      { path: "/order", element: <OrderPage /> },
 
       {
         path: "/admin-panel",

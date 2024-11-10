@@ -15,6 +15,9 @@ const paymentController = async (request, response) => {
       billing_address_collection: "auto",
        
       customer_email: user.email,
+      metadata:{
+        userId:request.userId
+      },
       
       line_items: cartItems.map((item, index) => {
         return {
