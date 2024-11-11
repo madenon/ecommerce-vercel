@@ -8,16 +8,16 @@ const userLoogout = async (req, res) => {
     res.clearCookie("token", tokenOption);
 
     res.status(200).json({
-      data: [],
       message: "Déconnexion réussie",
       error: false,
       success: true,
+      data: [],
     });
   } catch (error) {
     res.json({
       message: error.message || error,
-      success: false,
       error: true,
+      success: false,
     });
   }
 };
