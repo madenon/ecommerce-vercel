@@ -34,6 +34,7 @@ function App() {
     });
     const dataApi = await dataResponse.json();
       setCartProductCount(dataApi?.data?.count)
+      
   }
   useEffect(() => {
     //users details

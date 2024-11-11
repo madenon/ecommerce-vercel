@@ -5,7 +5,7 @@ const paymentController = async (request, response) => {
   try {
     const { cartItems } = request.body;
 
-    let deleveryCahrge = 2500;
+
     const user = await userModel.findOne({ _id: request.userId });
     const params = {
       submit_type: "pay",
@@ -30,7 +30,7 @@ const paymentController = async (request, response) => {
               },
               
             },
-            unit_amount: item.productId.sellingPrice * 100 ,
+            unit_amount: item.productId.sellingPrice * 100 
           },
           
           adjustable_quantity: {

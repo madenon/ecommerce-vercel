@@ -70,7 +70,7 @@ const webhooks = async (request, response) => {
         shipping_options:session.shipping_options.map(s=>{ 
             return {...s,shipping_amount:s.shipping_amount /100}
         }),
-        totalAmount:session.amount_total/100
+        totalAmount:(session.amount_total/100)
 
       }
       const order = new  orderModel(orderDetails)
