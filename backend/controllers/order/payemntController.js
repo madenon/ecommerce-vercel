@@ -4,15 +4,12 @@ import userModel from "../../models/userModel.js";
 const paymentController = async (request, response) => {
   try {
     const { cartItems } = request.body;
-
-
     const user = await userModel.findOne({ _id: request.userId });
     const params = {
       submit_type: "pay",
       mode: "payment",
       payment_method_types: ["card"],
       billing_address_collection: "auto",
-
       customer_email: user.email,
       metadata: {
         userId: request.userId,
@@ -49,8 +46,8 @@ const paymentController = async (request, response) => {
   } catch (error) {
     response.json({
       message: error.message || error,
-      success: false,
       error: true,
+      success: false,
     });
   }
 };
