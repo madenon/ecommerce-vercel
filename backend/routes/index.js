@@ -52,7 +52,7 @@ router.post("/delete-cart-product", authToken, deleteAddToCart);
 //payment and order 
 
 router.post("/checkout", authToken, paymentController)
-router.post("/webhooks", webhooks)
+router.post("/webhook", webhooks)
 router.get("/order-list", authToken, orderController)
 
 
