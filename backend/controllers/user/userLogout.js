@@ -3,7 +3,7 @@ const userLoogout = async (req, res) => {
     const tokenOption = {
       httpOnly: true,
       secure: true,
-      sameSite:'strict',
+      sameSite:'None',
     };
     res.clearCookie("token", tokenOption);
 

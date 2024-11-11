@@ -30,7 +30,7 @@ const userSignin = async (req, res) => {
         const tokenOption = {
         httpOnly: true,
         secure: true,
-        sameSite:'strict',
+        sameSite:'None',
       };
 
       res.cookie("token",token,tokenOption).status(200).json({
