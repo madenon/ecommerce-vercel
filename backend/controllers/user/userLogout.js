@@ -1,9 +1,10 @@
 const userLoogout = async (req, res) => {
   try {
     const tokenOption = {
-      httpOnly: true,
-      secure: true,
-      sameSite:'None',
+      httpOnly:true,
+      secure:process.env.NODE_ENV ==='production',
+      sameSite:process.env.NODE_ENV==='production'?'none':'strict',
+      maxAge:7 * 24 * 160 * 60 * 1000
     };
     res.clearCookie("token", tokenOption);
 
