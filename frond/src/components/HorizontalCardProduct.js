@@ -77,9 +77,9 @@ const HorizontalCardProduct = ({ category, heading }) => {
                     <p className="text-slate-500 line-through p-1 bg-slate-200 w-full  animate-pulse rounded-full">
                     </p>
                      
-                     
+
                     </div>
-                    <button className="text-sm text-white px-3 py-0.5 rounded-full w-full bg-slate-200  animate-pulse">
+                    <button className="text-sm text-white w-full px-3 py-0.5 rounded-full  bg-slate-200  animate-pulse">
                     </button>
                   </div>
                 </div>

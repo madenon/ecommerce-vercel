@@ -50,8 +50,7 @@ function App() {
           fetchUserDetails,// user details
           carProductCount,// current user 
           fetchUserAddToCart,// add to cart
-        }}
-      >
+          }}>
         <ToastContainer position="top-center" />
         <Header />
         <main className="min-h-[calc(100vh-120px)] pt-16">
